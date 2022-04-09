@@ -13,7 +13,7 @@ services:
     ports:
       - "9091:80"
     volumes:
-      - data:/var/www/html
+      - .:/var/www/html
 
   database:
     image: library/mysql:5.7

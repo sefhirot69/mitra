@@ -82,3 +82,8 @@ reload:
 #clear cache
 clear:
 	$(SYMFONY) cache:clear
+
+migration:
+	$(SYMFONY) make:migration
+migrate:
+	$(SYMFONY) doctrine:migrations:migrate
