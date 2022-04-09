@@ -83,6 +83,8 @@ reload:
 clear:
 	$(SYMFONY) cache:clear
 
+entity:
+	$(SYMFONY) make:entity
 migration:
 	$(SYMFONY) make:migration
 migrate:
