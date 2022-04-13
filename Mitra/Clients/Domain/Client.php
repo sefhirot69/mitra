@@ -7,7 +7,6 @@ namespace Mitra\Clients\Domain;
 
 use DateTime;
 use DateTimeImmutable;
-use Symfony\Component\Uid\Uuid;
 
 final class Client
 {
@@ -23,9 +22,9 @@ final class Client
     }
 
     /**
-     * @return Uuid
+     * @return string
      */
-    public function getUuid(): Uuid
+    public function getUuid(): string
     {
         return $this->uuid;
     }

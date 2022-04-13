@@ -14,7 +14,8 @@ services:
       - "9091:80"
     volumes:
       - .:/var/www/html
-
+    networks:
+      - mitra-network
   database:
     image: library/mysql:5.7
     command: --sql_mode=""
@@ -29,7 +30,13 @@ services:
       MYSQL_PASSWORD: root
     volumes:
       - db-data:/var/lib/postgresql/data:rw
+    networks:
+      - mitra-network
 
 volumes:
   data:
   db-data:
+
+networks:
+  mitra-network:
+    name: mitra-network
