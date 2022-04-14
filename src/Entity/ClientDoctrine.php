@@ -3,39 +3,67 @@
 namespace App\Entity;
 
 use App\Repository\ClientDoctrineRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\UuidInterface;
 
-#[ORM\Table(name : 'Client')]
+#[ORM\Table(name: 'Client')]
 #[ORM\Entity(repositoryClass: ClientDoctrineRepository::class)]
 class ClientDoctrine
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class:UuidGenerator::class)]
     #[ORM\Column(type: 'uuid')]
-    private $id;
+    private UuidInterface $id;
 
     #[ORM\Column(type: 'string', length: 150)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'string', length: 150)]
-    private $surname;
+    private string $surname;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $createdAt;
+    private DateTimeImmutable $createdAt;
 
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: AddressDoctrine::class, fetch: 'EAGER', orphanRemoval: true)]
-    private $address;
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: AddressDoctrine::class, cascade: ['persist'], fetch: 'EAGER', orphanRemoval: true)]
+    private Collection $address;
 
-    public function __construct()
-    {
+    /**
+     * @param UuidInterface $uuid
+     * @param string $name
+     * @param string $surname
+     * @param DateTimeImmutable $createdAt
+     */
+    public function __construct(
+        UuidInterface $uuid,
+        string $name,
+        string $surname,
+        DateTimeImmutable $createdAt,
+    ) {
+        $this->id = $uuid;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->createdAt = $createdAt;
         $this->address = new ArrayCollection();
     }
 
-    public function getId(): ?int
+
+    public static function create(
+        UuidInterface $uuid,
+        string $name,
+        string $surname,
+        DateTimeImmutable $createdAt,
+    ): self {
+        return new self($uuid, $name, $surname, $createdAt);
+    }
+
+    public function getId(): ?string
     {
-        return $this->id;
+        return $this->id->toString();
     }
 
     public function getName(): ?string
@@ -62,12 +90,12 @@ class ClientDoctrine
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
