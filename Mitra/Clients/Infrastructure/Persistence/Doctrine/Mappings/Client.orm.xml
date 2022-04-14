@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="Mitra\Clients\Domain\Client" table="Client">
-    <id name="id" type="uuid_client" column="id" length="36">
-    </id>
+    <id name="id" type="uuid_client" column="id" length="36"/>
     <field name="name" type="string" column="name" length="150" nullable="false">
       <options>
         <option name="fixed"/>
@@ -16,5 +15,7 @@
       </options>
     </field>
     <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <one-to-many field="address" target-entity="Mitra\Clients\Domain\Address" mapped-by="address" fetch="EAGER">
+    </one-to-many>
   </entity>
 </doctrine-mapping>

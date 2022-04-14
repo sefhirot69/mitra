@@ -6,26 +6,31 @@ declare(strict_types=1);
 namespace Mitra\Clients\Domain;
 
 use DateTime;
-use DateTimeImmutable;
 use Mitra\Shared\Domain\Clients\ClientId;
 
-final class Client
+class Client
 {
 
     /**
      * @param ClientId $id
      * @param string $name
      * @param string $surname
+     * @param Address[] $address
      * @param DateTime $createdAt
      */
-    public function __construct(private ClientId $id, private string $name, private string $surname, private DateTime $createdAt)
-    {
+    public function __construct(
+        private ClientId $id,
+        private string $name,
+        private string $surname,
+        private array $address,
+        private DateTime $createdAt
+    ) {
     }
 
     /**
      * @return ClientId
      */
-    public function getId() : ClientId
+    public function getId(): ClientId
     {
         return $this->id;
     }
@@ -47,11 +52,19 @@ final class Client
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return DateTime
      */
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return Address
+     */
+    public function getAddress(): Address
+    {
+        return $this->address;
     }
 
 

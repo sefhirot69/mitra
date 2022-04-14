@@ -90,4 +90,4 @@ migration:
 migrate:
 	$(SYMFONY) doctrine:migrations:migrate
 import-database:
-	$(SYMFONY) doctrine:mapping:import Mitra xml --path="Mitra/Clients/Infrastructure/Doctrine/Mappings"
+	$(SYMFONY) doctrine:mapping:import Mitra annotation --path="Mitra/Clients/Infrastructure/Doctrine/Entity"

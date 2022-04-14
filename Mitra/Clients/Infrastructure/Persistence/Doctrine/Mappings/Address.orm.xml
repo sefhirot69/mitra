@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Mitra\Address" table="Address">
-    <id name="id" type="binary" column="id">
-      <generator strategy="IDENTITY"/>
-    </id>
-    <field name="idClient" type="binary" column="id_client" nullable="false">
-      <options>
-        <option name="default"/>
-      </options>
-    </field>
-    <field name="postalcode" type="smallint" column="postalCode" nullable="false">
+  <entity name="Mitra\Clients\Domain\Address" table="Address">
+    <id name="id" type="uuid_address" column="id" length="36"/>
+    <field name="postalCode" type="smallint" column="postalCode" nullable="false">
       <options>
         <option name="unsigned"/>
       </options>
@@ -32,11 +25,14 @@
         <option name="default"/>
       </options>
     </field>
-    <field name="isactive" type="boolean" column="isActive" nullable="false">
+    <field name="isActive" type="boolean" column="isActive" nullable="false">
       <options>
         <option name="default">0</option>
       </options>
     </field>
     <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
+    <many-to-one field="client" target-entity="Mitra\Clients\Domain\Client" inversed-by="address" fetch="EAGER">
+        <join-column name="id_client"/>
+    </many-to-one>
   </entity>
 </doctrine-mapping>
