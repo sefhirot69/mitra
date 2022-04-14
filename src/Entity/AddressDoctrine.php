@@ -42,7 +42,7 @@ class AddressDoctrine
     /**
      * @param UuidInterface $id
      * @param ClientDoctrine $client
-     * @param string $postalCode
+     * @param int $postalCode
      * @param string $address
      * @param string $city
      * @param string $province

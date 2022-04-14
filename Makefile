@@ -89,5 +89,11 @@ migration:
 	$(SYMFONY) make:migration
 migrate:
 	$(SYMFONY) doctrine:migrations:migrate
+factory:
+	$(SYMFONY) make:factory
+factory-test:
+	$(SYMFONY) make:factory --test
+fixture:
+	@$(SYMFONY) doctrine:fixtures:load --purge-with-truncate -q
 import-database:
 	$(SYMFONY) doctrine:mapping:import Mitra annotation --path="Mitra/Clients/Infrastructure/Doctrine/Entity"
