@@ -7,26 +7,27 @@ namespace Mitra\Clients\Domain;
 
 use DateTime;
 use DateTimeImmutable;
+use Mitra\Shared\Domain\Clients\ClientId;
 
 final class Client
 {
 
     /**
-     * @param string $uuid
+     * @param ClientId $id
      * @param string $name
      * @param string $surname
      * @param DateTime $createdAt
      */
-    public function __construct(private string $uuid, private string $name, private string $surname, private DateTime $createdAt)
+    public function __construct(private ClientId $id, private string $name, private string $surname, private DateTime $createdAt)
     {
     }
 
     /**
-     * @return string
+     * @return ClientId
      */
-    public function getUuid(): string
+    public function getId() : ClientId
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     /**

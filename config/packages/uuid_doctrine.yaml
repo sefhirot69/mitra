@@ -1,0 +1,4 @@
+doctrine:
+    dbal:
+        types:
+            uuid_client: 'Mitra\Clients\Infrastructure\Persistence\Doctrine\Mappings\ClientIdType'

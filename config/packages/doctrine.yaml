@@ -13,7 +13,7 @@ doctrine:
             Mitra:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/Mitra/Clients/Infrastructure/Doctrine/Mappings'
+                dir: '%kernel.project_dir%/Mitra/Clients/Infrastructure/Persistence/Doctrine/Mappings'
                 prefix: 'Mitra\Clients\Domain'
                 alias: Mitra
 

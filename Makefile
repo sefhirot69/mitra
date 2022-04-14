@@ -89,3 +89,5 @@ migration:
 	$(SYMFONY) make:migration
 migrate:
 	$(SYMFONY) doctrine:migrations:migrate
+import-database:
+	$(SYMFONY) doctrine:mapping:import Mitra xml --path="Mitra/Clients/Infrastructure/Doctrine/Mappings"
