@@ -30,4 +30,15 @@ final class CreatorClientDtoMother
             AddressDtoMother::random($idClient)
         );
     }
+
+    public static function randomWithAddress(): CreatorClientDto
+    {
+        $idClient = MotherCreator::random()->uuid();
+        return self::create(
+            $idClient,
+            MotherCreator::random()->firstName(),
+            MotherCreator::random()->lastName(),
+            null
+        );
+    }
 }
