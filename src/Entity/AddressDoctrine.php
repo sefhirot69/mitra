@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AddressRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
@@ -37,7 +38,7 @@ class AddressDoctrine
     private bool $isActive;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private \DateTimeImmutable $createdAt;
+    private DateTimeImmutable $createdAt;
 
     /**
      * @param UuidInterface $id
@@ -47,7 +48,6 @@ class AddressDoctrine
      * @param string $city
      * @param string $province
      * @param bool $isActive
-     * @param \DateTimeImmutable $createdAt
      */
     public function __construct(
         UuidInterface $id,
@@ -57,7 +57,6 @@ class AddressDoctrine
         string $city,
         string $province,
         bool $isActive,
-        \DateTimeImmutable $createdAt
     ) {
         $this->id = $id;
         $this->client = $client;
@@ -66,7 +65,7 @@ class AddressDoctrine
         $this->city = $city;
         $this->province = $province;
         $this->isActive = $isActive;
-        $this->createdAt = $createdAt;
+        $this->createdAt = new DateTimeImmutable();
     }
 
 
@@ -115,7 +114,7 @@ class AddressDoctrine
     }
 
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }

@@ -40,7 +40,6 @@ final class ClientDoctrineFactory extends ModelFactory
             'uuid' => Uuid::fromString(self::faker()->uuid()),
             'name' => self::faker()->firstName(),
             'surname' => self::faker()->lastName(),
-            'createdAt' => new \DateTimeImmutable(),
         ];
     }
 

@@ -93,6 +93,6 @@ factory:
 factory-test:
 	$(SYMFONY) make:factory --test
 fixture:
-	@$(SYMFONY) doctrine:fixtures:load --purge-with-truncate -q
+	@$(SYMFONY) doctrine:fixtures:load
 import-database:
 	$(SYMFONY) doctrine:mapping:import Mitra annotation --path="Mitra/Clients/Infrastructure/Doctrine/Entity"

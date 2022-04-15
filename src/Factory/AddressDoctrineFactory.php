@@ -45,7 +45,6 @@ final class AddressDoctrineFactory extends ModelFactory
             'city' => self::faker()->city(),
             'province' => self::faker()->city(),
             'isActive' => self::faker()->boolean(),
-            'createdAt' => new \DateTimeImmutable(),
             'client' => ClientDoctrineFactory::new()
         ];
     }

@@ -7,12 +7,13 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Mitra\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Table(name: 'Client')]
 #[ORM\Entity(repositoryClass: ClientDoctrineRepository::class)]
-class ClientDoctrine
+class ClientDoctrine extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -36,18 +37,16 @@ class ClientDoctrine
      * @param UuidInterface $uuid
      * @param string $name
      * @param string $surname
-     * @param DateTimeImmutable $createdAt
      */
     public function __construct(
         UuidInterface $uuid,
         string $name,
         string $surname,
-        DateTimeImmutable $createdAt,
     ) {
         $this->id = $uuid;
         $this->name = $name;
         $this->surname = $surname;
-        $this->createdAt = $createdAt;
+        $this->createdAt = new DateTimeImmutable();
         $this->address = new ArrayCollection();
     }
 
@@ -56,9 +55,8 @@ class ClientDoctrine
         UuidInterface $uuid,
         string $name,
         string $surname,
-        DateTimeImmutable $createdAt,
     ): self {
-        return new self($uuid, $name, $surname, $createdAt);
+        return new self($uuid, $name, $surname);
     }
 
     public function getId(): ?string

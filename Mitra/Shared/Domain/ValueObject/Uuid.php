@@ -7,6 +7,7 @@ namespace Mitra\Shared\Domain\ValueObject;
 
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
+use Ramsey\Uuid\UuidInterface;
 use Stringable;
 
 class Uuid implements Stringable
@@ -20,6 +21,11 @@ class Uuid implements Stringable
     public static function random(): self
     {
         return new static(RamseyUuid::uuid4()->toString());
+    }
+
+    public function uuidInterface(): UuidInterface
+    {
+        return RamseyUuid::fromString($this->value);
     }
 
     public function value(): string
