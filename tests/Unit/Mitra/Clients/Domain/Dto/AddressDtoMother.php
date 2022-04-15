@@ -6,8 +6,9 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Mitra\Clients\Domain\Dto;
 
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
+use Mitra\Clients\Domain\Dto\AddressDto;
 
-final class CreatorClientAddressDtoMother
+final class AddressDtoMother
 {
     public static function create(
         string $uuid,
@@ -17,11 +18,11 @@ final class CreatorClientAddressDtoMother
         string $city,
         string $province,
         bool $isActive
-    ): CreatorClientAddressDto {
-        return new CreatorClientAddressDto($uuid, $uuidClient, $postalCode, $address, $city, $province, $isActive);
+    ): AddressDto {
+        return new AddressDto($uuid, $uuidClient, $postalCode, $address, $city, $province, $isActive);
     }
 
-    public static function random(string $uuidClient): CreatorClientAddressDto
+    public static function random(string $uuidClient): AddressDto
     {
         return self::create(
             MotherCreator::random()->uuid(),
