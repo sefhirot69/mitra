@@ -15,19 +15,17 @@ final class CreatorClientDtoMother
         string $uuid,
         string $name,
         string $surname,
-        AddressDto $address): CreatorClientDto
-    {
+        ?AddressDto $address = null
+    ): CreatorClientDto {
         return new CreatorClientDto($uuid, $name, $surname, $address);
     }
 
     public static function random(): CreatorClientDto
     {
-        $idClient = MotherCreator::random()->uuid();
         return self::create(
-            $idClient,
+            MotherCreator::random()->uuid(),
             MotherCreator::random()->firstName(),
             MotherCreator::random()->lastName(),
-            AddressDtoMother::random($idClient)
         );
     }
 
@@ -38,7 +36,17 @@ final class CreatorClientDtoMother
             $idClient,
             MotherCreator::random()->firstName(),
             MotherCreator::random()->lastName(),
-            null
+            AddressDtoMother::random($idClient)
+        );
+    }
+
+    public static function randomWithIdInvalid(): CreatorClientDto
+    {
+        $idClient = MotherCreator::random()->word();
+        return self::create(
+            $idClient,
+            MotherCreator::random()->firstName(),
+            MotherCreator::random()->lastName(),
         );
     }
 }

@@ -5,24 +5,20 @@ declare(strict_types=1);
 
 namespace Mitra\Clients\Domain\Dto;
 
-use Mitra\Shared\Domain\ValueObject\Uuid;
-
 final class CreatorClientDto
 {
-    private Uuid $uuid;
     public function __construct(
-        string $uuid,
+        private string $uuid,
         private string $name,
         private string $surname,
         private ?AddressDto $address = null
     ) {
-        $this->uuid = new Uuid($uuid);
     }
 
     /**
-     * @return Uuid
+     * @return string
      */
-    public function getUuid(): Uuid
+    public function getUuid(): string
     {
         return $this->uuid;
     }

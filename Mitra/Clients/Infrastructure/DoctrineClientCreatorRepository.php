@@ -9,6 +9,7 @@ use App\Entity\ClientDoctrine;
 use Mitra\Clients\Domain\Dto\CreatorClientDto;
 use Mitra\Clients\Domain\Interfaces\CreatorClientRepository;
 use Mitra\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
+use Ramsey\Uuid\Uuid;
 
 final class DoctrineClientCreatorRepository extends DoctrineRepository implements CreatorClientRepository
 {
@@ -16,7 +17,7 @@ final class DoctrineClientCreatorRepository extends DoctrineRepository implement
     public function save(CreatorClientDto $creatorClientDto): bool
     {
         $clientDoctrine = ClientDoctrine::create(
-            $creatorClientDto->getUuid()->uuidInterface(),
+            Uuid::fromString($creatorClientDto->getUuid()),
             $creatorClientDto->getName(),
             $creatorClientDto->getSurname()
         );

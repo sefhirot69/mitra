@@ -31,14 +31,14 @@ final class CreatorClientCommandHandler
     }
 
     /**
-     * @param Uuid $idClient
+     * @param string $idClient
      * @return bool
      * @throws ClientExistException
      */
-    private function assertNotExistClient(Uuid $idClient): bool
+    private function assertNotExistClient(string $idClient): bool
     {
-        if ($this->findClient->find($idClient) !== null) {
-            throw new ClientExistException($idClient->value());
+        if ($this->findClient->find(new Uuid($idClient)) !== null) {
+            throw new ClientExistException($idClient);
         }
 
         return true;
