@@ -7,6 +7,7 @@ namespace Mitra\Clients\Application;
 use Mitra\Clients\Domain\Exception\ClientExistException;
 use Mitra\Clients\Domain\Interfaces\CreatorClientRepository;
 use Mitra\Clients\Domain\Interfaces\FindClientRepository;
+use Mitra\Clients\Domain\ValueObject\ClientId;
 use Mitra\Shared\Domain\ValueObject\Uuid;
 
 final class CreatorClientCommandHandler
@@ -31,14 +32,14 @@ final class CreatorClientCommandHandler
     }
 
     /**
-     * @param string $idClient
+     * @param ClientId $idClient
      * @return bool
      * @throws ClientExistException
      */
-    private function assertNotExistClient(string $idClient): bool
+    private function assertNotExistClient(ClientId $idClient): bool
     {
-        if ($this->findClient->find(new Uuid($idClient)) !== null) {
-            throw new ClientExistException($idClient);
+        if ($this->findClient->find($idClient) !== null) {
+            throw new ClientExistException($idClient->value());
         }
 
         return true;

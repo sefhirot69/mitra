@@ -6,67 +6,69 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Mitra\Clients\Domain\Dto;
 
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
-use Mitra\Clients\Domain\Dto\AddressDto;
 use Mitra\Clients\Domain\Dto\CreatorClientDto;
+use Mitra\Clients\Domain\ValueObject\ClientId;
+use Mitra\Clients\Domain\ValueObject\ClientName;
+use Mitra\Clients\Domain\ValueObject\ClientSurname;
 
 final class CreatorClientDtoMother
 {
     public static function create(
-        string $uuid,
-        string $name,
-        string $surname,
-        ?AddressDto $address = null
+        ClientId $id,
+        ClientName $name,
+        ClientSurname $surname,
+        ?array $address = null
     ): CreatorClientDto {
-        return new CreatorClientDto($uuid, $name, $surname, $address);
+        return new CreatorClientDto($id, $name, $surname, $address);
     }
 
     public static function random(): CreatorClientDto
     {
         return self::create(
-            MotherCreator::random()->uuid(),
-            MotherCreator::random()->firstName(),
-            MotherCreator::random()->lastName(),
+            new ClientId(MotherCreator::random()->uuid()),
+            new ClientName(MotherCreator::random()->firstName()),
+            new ClientSurname(MotherCreator::random()->lastName()),
         );
     }
 
     public static function randomWithAddress(): CreatorClientDto
     {
-        $idClient = MotherCreator::random()->uuid();
+        $idClient = new ClientId(MotherCreator::random()->uuid());
         return self::create(
             $idClient,
-            MotherCreator::random()->firstName(),
-            MotherCreator::random()->lastName(),
-            AddressDtoMother::random($idClient)
+            new ClientName(MotherCreator::random()->firstName()),
+            new ClientSurname(MotherCreator::random()->lastName()),
+            AddressDtoMother::randomArray($idClient)
         );
     }
 
     public static function randomWithIdInvalid(): CreatorClientDto
     {
-        $idClient = MotherCreator::random()->word();
+        $idClient = new ClientId(MotherCreator::random()->word());
         return self::create(
             $idClient,
-            MotherCreator::random()->firstName(),
-            MotherCreator::random()->lastName(),
+            new ClientName(MotherCreator::random()->firstName()),
+            new ClientSurname(MotherCreator::random()->lastName()),
         );
     }
 
     public static function randomWithNameInvalid(): CreatorClientDto
     {
-        $idClient = MotherCreator::random()->uuid();
+        $idClient = new ClientId(MotherCreator::random()->uuid());
         return self::create(
             $idClient,
-            MotherCreator::random()->realTextBetween(81),
-            MotherCreator::random()->lastName(),
+            new ClientName(MotherCreator::random()->realTextBetween(81)),
+            new ClientSurname(MotherCreator::random()->lastName()),
         );
     }
 
     public static function randomWithSurnameInvalid(): CreatorClientDto
     {
-        $idClient = MotherCreator::random()->uuid();
+        $idClient = new ClientId(MotherCreator::random()->uuid());
         return self::create(
             $idClient,
-            MotherCreator::random()->firstName(),
-            MotherCreator::random()->realTextBetween(101),
+            new ClientName(MotherCreator::random()->firstName()),
+            new ClientSurname(MotherCreator::random()->realTextBetween(101)),
         );
     }
 }

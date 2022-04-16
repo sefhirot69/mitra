@@ -5,35 +5,58 @@ declare(strict_types=1);
 
 namespace Mitra\Clients\Domain\Dto;
 
+use Mitra\Clients\Domain\Address;
+use Mitra\Clients\Domain\ValueObject\AddressId;
+use Mitra\Clients\Domain\ValueObject\ClientId;
+
 final class AddressDto
 {
 
     public function __construct(
-        private string $uuid,
-        private string $uuidClient,
+        private AddressId $id,
+        private ClientId $idClient,
         private int $postalCode,
         private string $address,
         private string $city,
         private string $province,
         private bool $isActive,
-    )
-    {
+    ) {
+    }
+
+    public static function create(
+        string $uuid,
+        string $uuidClient,
+        int $postalCode,
+        string $address,
+        string $city,
+        string $province,
+        bool $isActive,
+    ): self {
+        return new self(
+            $uuid,
+            $uuidClient,
+            $postalCode,
+            $address,
+            $city,
+            $province,
+            $isActive,
+        );
     }
 
     /**
-     * @return string
+     * @return AddressId
      */
-    public function getUuid(): string
+    public function getId(): AddressId
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     /**
-     * @return string
+     * @return ClientId
      */
-    public function getUuidClient(): string
+    public function getIdClient(): ClientId
     {
-        return $this->uuidClient;
+        return $this->idClient;
     }
 
     /**
@@ -74,6 +97,18 @@ final class AddressDto
     public function isActive(): bool
     {
         return $this->isActive;
+    }
+
+    public function mapToDomain() : Address {
+        return new Address(
+            $this->getId(),
+            $this->getIdClient(),
+            $this->getPostalCode(),
+            $this->getAddress(),
+            $this->getCity(),
+            $this->getProvince(),
+            $this->isActive(),
+        );
     }
 
 }

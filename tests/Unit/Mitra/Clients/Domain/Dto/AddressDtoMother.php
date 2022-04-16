@@ -7,31 +7,65 @@ namespace App\Tests\Unit\Mitra\Clients\Domain\Dto;
 
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
 use Mitra\Clients\Domain\Dto\AddressDto;
+use Mitra\Clients\Domain\ValueObject\AddressId;
+use Mitra\Clients\Domain\ValueObject\ClientId;
 
 final class AddressDtoMother
 {
     public static function create(
-        string $uuid,
-        string $uuidClient,
+        AddressId $id,
+        ClientId $idClient,
         int $postalCode,
         string $address,
         string $city,
         string $province,
         bool $isActive
     ): AddressDto {
-        return new AddressDto($uuid, $uuidClient, $postalCode, $address, $city, $province, $isActive);
+        return new AddressDto($id, $idClient, $postalCode, $address, $city, $province, $isActive);
     }
 
-    public static function random(string $uuidClient): AddressDto
+    /**
+     * @param ClientId $idClient
+     * @return AddressDto
+     */
+    public static function random(ClientId $idClient): AddressDto
     {
         return self::create(
-            MotherCreator::random()->uuid(),
-            $uuidClient,
+            new AddressId(MotherCreator::random()->uuid()),
+            $idClient,
             (int)MotherCreator::random()->postcode(),
             MotherCreator::random()->address(),
             MotherCreator::random()->city(),
             MotherCreator::random()->city(),
             MotherCreator::random()->boolean(),
         );
+    }
+
+    /**
+     * @param ClientId $idClient
+     * @return AddressDto[]
+     */
+    public static function randomArray(ClientId $idClient): array
+    {
+        return [
+            self::create(
+                new AddressId(MotherCreator::random()->uuid()),
+                $idClient,
+                (int)MotherCreator::random()->postcode(),
+                MotherCreator::random()->address(),
+                MotherCreator::random()->city(),
+                MotherCreator::random()->city(),
+                true,
+            ),
+            self::create(
+                new AddressId(MotherCreator::random()->uuid()),
+                $idClient,
+                (int)MotherCreator::random()->postcode(),
+                MotherCreator::random()->address(),
+                MotherCreator::random()->city(),
+                MotherCreator::random()->city(),
+                false,
+            ),
+        ];
     }
 }

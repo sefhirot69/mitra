@@ -5,26 +5,33 @@ declare(strict_types=1);
 
 namespace Mitra\Clients\Domain\Dto;
 
+use Mitra\Clients\Domain\Address;
 use Mitra\Clients\Domain\Client;
+use Mitra\Clients\Domain\ValueObject\ClientId;
 use Mitra\Clients\Domain\ValueObject\ClientName;
 use Mitra\Clients\Domain\ValueObject\ClientSurname;
-use Mitra\Shared\Domain\Clients\ClientId;
 
 final class CreatorClientDto
 {
+    /**
+     * @param ClientId $uuid
+     * @param ClientName $name
+     * @param ClientSurname $surname
+     * @param AddressDto[]|null $address
+     */
     public function __construct(
-        private string $uuid,
-        private string $name,
-        private string $surname,
-        private ?AddressDto $address = null
+        private ClientId $uuid,
+        private ClientName $name,
+        private ClientSurname $surname,
+        private ?array $address = null
     ) {
     }
 
     public static function create(
-        string $uuid,
-        string $name,
-        string $surname,
-        ?AddressDto $address = null
+        ClientId $uuid,
+        ClientName $name,
+        ClientSurname $surname,
+        ?array $address = null
     ): self {
         return new self(
             $uuid,
@@ -34,48 +41,55 @@ final class CreatorClientDto
         );
     }
 
-    public static function mapToDomain(
-        string $uuid,
-        string $name,
-        string $surname,
-        ?AddressDto $address = null
-    ): Client {
+    public function mapToDomain(): Client
+    {
         return Client::create(
-            new ClientId($uuid),
-            new ClientName($name),
-            new CLientSurname($surname),
-            $address->mapToDomain()
+            $this->getUuid(),
+            $this->getName(),
+            $this->getSurname(),
+            null,
+            array_map(static function (AddressDto $addressDto) {
+                return Address::create(
+                    $addressDto->getId(),
+                    $addressDto->getIdClient(),
+                    $addressDto->getPostalCode(),
+                    $addressDto->getAddress(),
+                    $addressDto->getCity(),
+                    $addressDto->getProvince(),
+                    $addressDto->isActive(),
+                );
+            }, $this->getAddress() ?? []),
         );
     }
 
     /**
-     * @return string
+     * @return ClientId
      */
-    public function getUuid(): string
+    public function getUuid(): ClientId
     {
         return $this->uuid;
     }
 
     /**
-     * @return string
+     * @return ClientName
      */
-    public function getName(): string
+    public function getName(): ClientName
     {
         return $this->name;
     }
 
     /**
-     * @return string
+     * @return ClientSurname
      */
-    public function getSurname(): string
+    public function getSurname(): ClientSurname
     {
         return $this->surname;
     }
 
     /**
-     * @return AddressDto|null
+     * @return AddressDto[]|null
      */
-    public function getAddress(): ?AddressDto
+    public function getAddress(): ?array
     {
         return $this->address;
     }

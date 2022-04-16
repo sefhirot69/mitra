@@ -6,9 +6,9 @@ declare(strict_types=1);
 namespace Mitra\Clients\Domain;
 
 use DateTimeImmutable;
+use Mitra\Clients\Domain\ValueObject\ClientId;
 use Mitra\Clients\Domain\ValueObject\ClientName;
 use Mitra\Clients\Domain\ValueObject\ClientSurname;
-use Mitra\Shared\Domain\Clients\ClientId;
 
 class Client
 {
@@ -17,14 +17,14 @@ class Client
      * @param ClientId $id
      * @param ClientName $name
      * @param ClientSurname $surname
-     * @param DateTimeImmutable $createdAt
+     * @param DateTimeImmutable|null $createdAt
      * @param null|Address[] $address
      */
     public function __construct(
         private ClientId $id,
         private ClientName $name,
         private ClientSurname $surname,
-        private DateTimeImmutable $createdAt,
+        private ?DateTimeImmutable $createdAt = null,
         private ?array $address = null,
     ) {
     }
@@ -33,7 +33,7 @@ class Client
         ClientId $id,
         ClientName $name,
         ClientSurname $surname,
-        DateTimeImmutable $createdAt,
+        ?DateTimeImmutable $createdAt = null,
         $address = null,
     ): self {
         return new self(
@@ -70,9 +70,9 @@ class Client
     }
 
     /**
-     * @return DateTimeImmutable
+     * @return null|DateTimeImmutable
      */
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
