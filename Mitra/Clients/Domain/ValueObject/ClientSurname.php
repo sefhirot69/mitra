@@ -12,6 +12,6 @@ final class ClientSurname extends StringValueObject
     public function __construct(string $surname)
     {
         parent::__construct($surname);
-        $this->checkLength(10, 100);
+        $this->checkLength(3, 100);
     }
 }

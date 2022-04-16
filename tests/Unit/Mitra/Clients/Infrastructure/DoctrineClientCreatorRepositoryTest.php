@@ -9,6 +9,8 @@ use App\Tests\Unit\Mitra\Clients\Domain\Dto\CreatorClientDtoMother;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Mitra\Clients\Domain\Dto\CreatorClientDto;
+use Mitra\Clients\Domain\ValueObject\ClientName;
+use Mitra\Clients\Domain\ValueObject\ClientSurname;
 use Mitra\Clients\Infrastructure\DoctrineClientCreatorRepository;
 use Mitra\Shared\Domain\Clients\ClientId;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -115,8 +117,8 @@ final class DoctrineClientCreatorRepositoryTest extends TestCase
                 $clientWithNameInvalid,
                 InvalidArgumentException::class,
                 sprintf(
-                    '<%s> must have a length between <5> and <50>.',
-                    $clientWithNameInvalid->getName(),
+                    '<%s> must have a length between <3> and <50>.',
+                    ClientName::class,
                 ),
                 400
             ],
@@ -124,8 +126,8 @@ final class DoctrineClientCreatorRepositoryTest extends TestCase
                 $clientWithSurnameInvalid,
                 InvalidArgumentException::class,
                 sprintf(
-                    '<%s> must have a length between <10> and <100>.',
-                    $clientWithSurnameInvalid->getSurname(),
+                    '<%s> must have a length between <3> and <100>.',
+                    ClientSurname::class,
                 ),
                 400
             ]

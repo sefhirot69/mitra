@@ -22,7 +22,7 @@ abstract class StringValueObject
         $length = strlen($this->value());
         if ($length < $minLength || $length > $maxLength) {
             throw new InvalidArgumentException(
-                sprintf('<%s> must have a length between <%s> and <%s>.', $this->value(), $minLength, $maxLength),
+                sprintf('<%s> must have a length between <%s> and <%s>.', static::class, $minLength, $maxLength),
                 400
             );
         }

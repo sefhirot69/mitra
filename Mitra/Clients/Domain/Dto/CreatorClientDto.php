@@ -6,7 +6,9 @@ declare(strict_types=1);
 namespace Mitra\Clients\Domain\Dto;
 
 use Mitra\Clients\Domain\Client;
-use Mitra\Shared\Domain\ValueObject\Uuid;
+use Mitra\Clients\Domain\ValueObject\ClientName;
+use Mitra\Clients\Domain\ValueObject\ClientSurname;
+use Mitra\Shared\Domain\Clients\ClientId;
 
 final class CreatorClientDto
 {
@@ -39,7 +41,7 @@ final class CreatorClientDto
         ?AddressDto $address = null
     ): Client {
         return Client::create(
-            new Uuid($uuid),
+            new ClientId($uuid),
             new ClientName($name),
             new CLientSurname($surname),
             $address->mapToDomain()
