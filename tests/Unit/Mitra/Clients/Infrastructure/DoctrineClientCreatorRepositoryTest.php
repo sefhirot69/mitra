@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Mitra\Clients\Domain\Dto\CreatorClientDto;
 use Mitra\Clients\Infrastructure\DoctrineClientCreatorRepository;
+use Mitra\Shared\Domain\Clients\ClientId;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -72,9 +73,8 @@ final class DoctrineClientCreatorRepositoryTest extends TestCase
         CreatorClientDto $clientDto,
         string $exceptionClass,
         string $errorMessage,
-        string $errorCode
+        int $errorCode
     ): void {
-
 
         //THEN
         $this->expectException($exceptionClass);
@@ -93,18 +93,39 @@ final class DoctrineClientCreatorRepositoryTest extends TestCase
 
     }
 
-
+    //TODO esto son validaciones de entrada, deberia de ir en el command, porque no es lógica de negocio
     public function providersExpectValidationError(): array
     {
         $clientWithIdInvalid = CreatorClientDtoMother::randomWithIdInvalid();
+        $clientWithNameInvalid = CreatorClientDtoMother::randomWithNameInvalid();
+        $clientWithSurnameInvalid = CreatorClientDtoMother::randomWithSurnameInvalid();
+
         return [
             [
                 $clientWithIdInvalid,
                 InvalidArgumentException::class,
                 sprintf(
-                    '<%s/> does not allow the value <%s>.',
-                    InvalidArgumentException::class,
-                    $clientWithIdInvalid->getUuid()->value()
+                    '<%s> does not allow the value <%s>.',
+                    ClientId::class,
+                    $clientWithIdInvalid->getUuid()
+                ),
+                400
+            ],
+            [
+                $clientWithNameInvalid,
+                InvalidArgumentException::class,
+                sprintf(
+                    '<%s> must have a length between <5> and <50>.',
+                    $clientWithNameInvalid->getName(),
+                ),
+                400
+            ],
+            [
+                $clientWithSurnameInvalid,
+                InvalidArgumentException::class,
+                sprintf(
+                    '<%s> must have a length between <10> and <100>.',
+                    $clientWithSurnameInvalid->getSurname(),
                 ),
                 400
             ]

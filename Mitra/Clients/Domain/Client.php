@@ -5,7 +5,9 @@ declare(strict_types=1);
 
 namespace Mitra\Clients\Domain;
 
-use DateTime;
+use DateTimeImmutable;
+use Mitra\Clients\Domain\ValueObject\ClientName;
+use Mitra\Clients\Domain\ValueObject\ClientSurname;
 use Mitra\Shared\Domain\Clients\ClientId;
 
 class Client
@@ -13,18 +15,34 @@ class Client
 
     /**
      * @param ClientId $id
-     * @param string $name
-     * @param string $surname
-     * @param Address[] $address
-     * @param DateTime $createdAt
+     * @param ClientName $name
+     * @param ClientSurname $surname
+     * @param DateTimeImmutable $createdAt
+     * @param null|Address[] $address
      */
     public function __construct(
         private ClientId $id,
-        private string $name,
-        private string $surname,
-        private array $address,
-        private DateTime $createdAt
+        private ClientName $name,
+        private ClientSurname $surname,
+        private DateTimeImmutable $createdAt,
+        private ?array $address = null,
     ) {
+    }
+
+    public static function create(
+        ClientId $id,
+        ClientName $name,
+        ClientSurname $surname,
+        DateTimeImmutable $createdAt,
+        $address = null,
+    ): self {
+        return new self(
+            $id,
+            $name,
+            $surname,
+            $createdAt,
+            $address,
+        );
     }
 
     /**
@@ -40,7 +58,7 @@ class Client
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->name->value();
     }
 
     /**
@@ -48,21 +66,21 @@ class Client
      */
     public function getSurname(): string
     {
-        return $this->surname;
+        return $this->surname->value();
     }
 
     /**
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
 
     /**
-     * @return Address
+     * @return Address[]|null
      */
-    public function getAddress(): Address
+    public function getAddress(): ?array
     {
         return $this->address;
     }

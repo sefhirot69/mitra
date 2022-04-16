@@ -5,6 +5,9 @@ declare(strict_types=1);
 
 namespace Mitra\Clients\Domain\Dto;
 
+use Mitra\Clients\Domain\Client;
+use Mitra\Shared\Domain\ValueObject\Uuid;
+
 final class CreatorClientDto
 {
     public function __construct(
@@ -13,6 +16,34 @@ final class CreatorClientDto
         private string $surname,
         private ?AddressDto $address = null
     ) {
+    }
+
+    public static function create(
+        string $uuid,
+        string $name,
+        string $surname,
+        ?AddressDto $address = null
+    ): self {
+        return new self(
+            $uuid,
+            $name,
+            $surname,
+            $address
+        );
+    }
+
+    public static function mapToDomain(
+        string $uuid,
+        string $name,
+        string $surname,
+        ?AddressDto $address = null
+    ): Client {
+        return Client::create(
+            new Uuid($uuid),
+            new ClientName($name),
+            new CLientSurname($surname),
+            $address->mapToDomain()
+        );
     }
 
     /**

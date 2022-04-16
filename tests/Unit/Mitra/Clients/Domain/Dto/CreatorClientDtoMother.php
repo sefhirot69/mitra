@@ -49,4 +49,24 @@ final class CreatorClientDtoMother
             MotherCreator::random()->lastName(),
         );
     }
+
+    public static function randomWithNameInvalid(): CreatorClientDto
+    {
+        $idClient = MotherCreator::random()->uuid();
+        return self::create(
+            $idClient,
+            MotherCreator::random()->realTextBetween(81),
+            MotherCreator::random()->lastName(),
+        );
+    }
+
+    public static function randomWithSurnameInvalid(): CreatorClientDto
+    {
+        $idClient = MotherCreator::random()->uuid();
+        return self::create(
+            $idClient,
+            MotherCreator::random()->firstName(),
+            MotherCreator::random()->realTextBetween(101),
+        );
+    }
 }
