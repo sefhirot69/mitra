@@ -8,7 +8,6 @@ use Mitra\Clients\Domain\Exception\ClientExistException;
 use Mitra\Clients\Domain\Interfaces\CreatorClientRepository;
 use Mitra\Clients\Domain\Interfaces\FindClientRepository;
 use Mitra\Clients\Domain\ValueObject\ClientId;
-use Mitra\Shared\Domain\ValueObject\Uuid;
 
 final class CreatorClientCommandHandler
 {
@@ -23,9 +22,10 @@ final class CreatorClientCommandHandler
      */
     public function __invoke(CreatorClientCommand $clientCommand): bool
     {
-        $idClient = $clientCommand->getCreatorClientDto()->getUuid();
+        $creatorClientDto = $clientCommand->mapToDto();
+        $idClient = $creatorClientDto->getUuid();
         if ($this->assertNotExistClient($idClient)) {
-            return $this->creatorClient->save($clientCommand->getCreatorClientDto());
+            return $this->creatorClient->save($creatorClientDto);
         }
 
         return false;

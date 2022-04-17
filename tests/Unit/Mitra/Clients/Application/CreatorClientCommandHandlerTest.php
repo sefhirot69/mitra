@@ -32,13 +32,13 @@ final class CreatorClientCommandHandlerTest extends TestCase
         $this->findClientMock
             ->expects(self::once())
             ->method('find')
-            ->with($commandClientCreator->getCreatorClientDto()->getUuid())
+            ->with($commandClientCreator->mapToDto()->getUuid())
             ->willReturn(null);
 
         $this->creatorClientMock
             ->expects(self::once())
             ->method('save')
-            ->with($commandClientCreator->getCreatorClientDto())
+            ->with($commandClientCreator->mapToDto())
             ->willReturn(true);
 
         //WHEN
@@ -55,7 +55,7 @@ final class CreatorClientCommandHandlerTest extends TestCase
     {
         //GIVEN
         $commandClientCreator = CreatorClientCommandMother::random();
-        $idClient = $commandClientCreator->getCreatorClientDto()->getUuid();
+        $idClient = $commandClientCreator->mapToDto()->getUuid();
 
         $this->findClientMock
             ->expects(self::once())

@@ -6,19 +6,26 @@ declare(strict_types=1);
 namespace Mitra\Clients\Application;
 
 use Mitra\Clients\Domain\Dto\CreatorClientDto;
+use Mitra\Clients\Domain\ValueObject\ClientId;
+use Mitra\Clients\Domain\ValueObject\ClientName;
+use Mitra\Clients\Domain\ValueObject\ClientSurname;
+
 
 final class CreatorClientCommand
 {
     public function __construct(
-        private CreatorClientDto $creatorClientDto,
+        private string $idClient,
+        private string $name,
+        private string $surname,
     ) {
     }
 
-    /**
-     * @return CreatorClientDto
-     */
-    public function getCreatorClientDto(): CreatorClientDto
+    public function mapToDto(): CreatorClientDto
     {
-        return $this->creatorClientDto;
+        return CreatorClientDto::create(
+            new ClientId($this->idClient),
+            new ClientName($this->name),
+            new ClientSurname($this->surname),
+        );
     }
 }
