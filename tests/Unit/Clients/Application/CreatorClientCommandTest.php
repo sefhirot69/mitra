@@ -2,7 +2,6 @@
 
 namespace App\Tests\Unit\Clients\Application;
 
-use App\Tests\Unit\Mitra\Clients\Domain\Dto\CreatorClientDtoMother;
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
 use InvalidArgumentException;
 use Mitra\Clients\Application\CreatorClientCommand;
