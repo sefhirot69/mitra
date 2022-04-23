@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 
-namespace App\Tests\Unit\Mitra\Clients\Application;
+namespace App\Tests\Unit\Mitra\Client\Application;
 
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
-use Mitra\Clients\Application\CreatorClientCommand;
+use Mitra\Client\Application\CreatorClientCommand;
 
 final class CreatorClientCommandMother
 {

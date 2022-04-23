@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Unit\Clients\Application;
+namespace App\Tests\Unit\Mitra\Client\Application;
 
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
 use InvalidArgumentException;
-use Mitra\Clients\Application\CreatorClientCommand;
-use Mitra\Clients\Domain\ValueObject\ClientId;
-use Mitra\Clients\Domain\ValueObject\ClientName;
-use Mitra\Clients\Domain\ValueObject\ClientSurname;
+use Mitra\Client\Application\CreatorClientCommand;
+use Mitra\Client\Domain\ValueObject\ClientId;
+use Mitra\Client\Domain\ValueObject\ClientName;
+use Mitra\Client\Domain\ValueObject\ClientSurname;
 use PHPUnit\Framework\TestCase;
 
 class CreatorClientCommandTest extends TestCase

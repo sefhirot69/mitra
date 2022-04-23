@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 
-namespace App\Tests\Unit\Mitra\Clients\Infrastructure;
+namespace App\Tests\Unit\Mitra\Client\Infrastructure;
 
-use App\Tests\Unit\Mitra\Clients\Domain\Dto\CreatorClientDtoMother;
+use App\Tests\Unit\Mitra\Client\Domain\Dto\CreatorClientDtoMother;
 use Doctrine\ORM\EntityManagerInterface;
-use Mitra\Clients\Infrastructure\DoctrineClientCreatorRepository;
+use Mitra\Client\Infrastructure\DoctrineClientCreatorRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

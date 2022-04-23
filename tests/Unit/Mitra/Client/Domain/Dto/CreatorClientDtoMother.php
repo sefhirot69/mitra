@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 
-namespace App\Tests\Unit\Mitra\Clients\Domain\Dto;
+namespace App\Tests\Unit\Mitra\Client\Domain\Dto;
 
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
-use Mitra\Clients\Domain\Dto\CreatorClientDto;
-use Mitra\Clients\Domain\ValueObject\ClientId;
-use Mitra\Clients\Domain\ValueObject\ClientName;
-use Mitra\Clients\Domain\ValueObject\ClientSurname;
+use Mitra\Client\Domain\Dto\CreatorClientDto;
+use Mitra\Client\Domain\ValueObject\ClientId;
+use Mitra\Client\Domain\ValueObject\ClientName;
+use Mitra\Client\Domain\ValueObject\ClientSurname;
 
 final class CreatorClientDtoMother
 {
