@@ -32,7 +32,11 @@ services:
       - db-data:/var/lib/postgresql/data:rw
     networks:
       - mitra-network
-
+  mailer:
+    image: schickling/mailcatcher
+    ports: [ "1025", "1080" ]
+    networks:
+      - mitra-network
 volumes:
   data:
   db-data:
