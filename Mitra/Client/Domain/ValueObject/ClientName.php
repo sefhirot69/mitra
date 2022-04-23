@@ -3,15 +3,16 @@
 declare(strict_types=1);
 
 
-namespace Mitra\Clients\Domain\ValueObject;
+namespace Mitra\Client\Domain\ValueObject;
 
 use Mitra\Shared\Domain\ValueObject\StringValueObject;
 
-final class ClientSurname extends StringValueObject
+final class ClientName extends StringValueObject
 {
+
     public function __construct(string $surname)
     {
         parent::__construct($surname);
-        $this->checkLength(3, 100);
+        $this->checkLength(3, 50);
     }
 }

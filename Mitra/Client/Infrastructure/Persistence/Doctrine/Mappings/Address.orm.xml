@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="Mitra\Clients\Domain\Address" table="Address">
+  <entity name="Mitra\Client\Domain\Address" table="Address">
     <id name="id" type="uuid_address" column="id" length="36"/>
     <field name="postalCode" type="smallint" column="postalCode" nullable="false">
       <options>
@@ -31,7 +31,7 @@
       </options>
     </field>
     <field name="createdAt" type="datetime" column="created_at" nullable="false"/>
-    <many-to-one field="client" target-entity="Mitra\Clients\Domain\Client" inversed-by="address" fetch="EAGER">
+    <many-to-one field="client" target-entity="Mitra\Client\Domain\Client" inversed-by="address" fetch="EAGER">
         <join-column name="id_client"/>
     </many-to-one>
   </entity>

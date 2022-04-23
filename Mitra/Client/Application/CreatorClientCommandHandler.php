@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mitra\Clients\Application;
+namespace Mitra\Client\Application;
 
-use Mitra\Clients\Domain\Exception\ClientExistException;
-use Mitra\Clients\Domain\Interfaces\CreatorClientRepository;
-use Mitra\Clients\Domain\Interfaces\FindClientRepository;
-use Mitra\Clients\Domain\ValueObject\ClientId;
+use Mitra\Client\Domain\Exception\ClientExistException;
+use Mitra\Client\Domain\Interfaces\CreatorClientRepository;
+use Mitra\Client\Domain\Interfaces\FindClientRepository;
+use Mitra\Client\Domain\ValueObject\ClientId;
 
 final class CreatorClientCommandHandler
 {

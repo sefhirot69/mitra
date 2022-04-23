@@ -3,56 +3,43 @@
 declare(strict_types=1);
 
 
-namespace Mitra\Clients\Domain;
+namespace Mitra\Client\Domain\Dto;
 
-use DateTimeImmutable;
-use Mitra\Clients\Domain\ValueObject\AddressId;
-use Mitra\Clients\Domain\ValueObject\ClientId;
+use Mitra\Client\Domain\Address;
+use Mitra\Client\Domain\ValueObject\AddressId;
+use Mitra\Client\Domain\ValueObject\ClientId;
 
-final class Address
+final class AddressDto
 {
 
-    /**
-     * @param AddressId $id
-     * @param ClientId $client
-     * @param int $postalCode
-     * @param string $address
-     * @param string $city
-     * @param string $province
-     * @param bool $isActive
-     * @param DateTimeImmutable|null $createdAt
-     */
     public function __construct(
         private AddressId $id,
-        private ClientId $client,
+        private ClientId $idClient,
         private int $postalCode,
         private string $address,
         private string $city,
         private string $province,
         private bool $isActive,
-        private ?DateTimeImmutable $createdAt = null
     ) {
     }
 
     public static function create(
-        AddressId $id,
-        ClientId $client,
+        string $uuid,
+        string $uuidClient,
         int $postalCode,
         string $address,
         string $city,
         string $province,
         bool $isActive,
-        ?DateTimeImmutable $createdAt = null
     ): self {
         return new self(
-            $id,
-            $client,
+            $uuid,
+            $uuidClient,
             $postalCode,
             $address,
             $city,
             $province,
             $isActive,
-            $createdAt
         );
     }
 
@@ -67,15 +54,15 @@ final class Address
     /**
      * @return ClientId
      */
-    public function getClient(): ClientId
+    public function getIdClient(): ClientId
     {
-        return $this->client;
+        return $this->idClient;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getPostalCode(): string
+    public function getPostalCode(): int
     {
         return $this->postalCode;
     }
@@ -112,12 +99,16 @@ final class Address
         return $this->isActive;
     }
 
-    /**
-     * @return DateTimeImmutable|null
-     */
-    public function getCreatedAt(): ?DateTimeImmutable
-    {
-        return $this->createdAt;
+    public function mapToDomain() : Address {
+        return new Address(
+            $this->getId(),
+            $this->getIdClient(),
+            $this->getPostalCode(),
+            $this->getAddress(),
+            $this->getCity(),
+            $this->getProvince(),
+            $this->isActive(),
+        );
     }
 
 }

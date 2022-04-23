@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 
-namespace Mitra\Clients\Domain\Dto;
+namespace Mitra\Client\Domain\Dto;
 
-use Mitra\Clients\Domain\Address;
-use Mitra\Clients\Domain\Client;
-use Mitra\Clients\Domain\ValueObject\ClientId;
-use Mitra\Clients\Domain\ValueObject\ClientName;
-use Mitra\Clients\Domain\ValueObject\ClientSurname;
+use Mitra\Client\Domain\Address;
+use Mitra\Client\Domain\Client;
+use Mitra\Client\Domain\ValueObject\ClientId;
+use Mitra\Client\Domain\ValueObject\ClientName;
+use Mitra\Client\Domain\ValueObject\ClientSurname;
 
 final class CreatorClientDto
 {

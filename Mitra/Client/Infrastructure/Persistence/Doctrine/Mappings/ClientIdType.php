@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mitra\Clients\Infrastructure\Persistence\Doctrine\Mappings;
+namespace Mitra\Client\Infrastructure\Persistence\Doctrine\Mappings;
 
 use Mitra\Shared\Domain\Clients\ClientId;
 use Mitra\Shared\Infrastructure\Persistence\Doctrine\UuidType;
