@@ -30,6 +30,9 @@ final class ClientCreatorControllerTest extends WebTestCase
 
     }
 
+    /**
+     * @test
+     */
     public function shouldReturnErrorBadRequest() : void {
 
         $this->client->request('POST','client', [

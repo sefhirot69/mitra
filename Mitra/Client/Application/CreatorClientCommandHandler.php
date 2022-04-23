@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Mitra\Client\Application;
 
+use Mitra\Client\Domain\ClientNotFoundException;
 use Mitra\Client\Domain\Exception\ClientExistException;
 use Mitra\Client\Domain\Interfaces\CreatorClientRepository;
 use Mitra\Client\Domain\Interfaces\FindClientRepository;
-use Mitra\Client\Domain\ValueObject\ClientId;
+use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class CreatorClientCommandHandler
 {
@@ -38,11 +39,13 @@ final class CreatorClientCommandHandler
      */
     private function assertNotExistClient(ClientId $idClient): bool
     {
-        if ($this->findClient->find($idClient) !== null) {
-            throw new ClientExistException($idClient->value());
+        try {
+            if ($this->findClient->find($idClient) !== null) {
+                throw new ClientExistException($idClient->value());
+            }
+        } catch (ClientNotFoundException) {
+            return true;
         }
-
-        return true;
     }
 
 

@@ -8,7 +8,7 @@ namespace App\Tests\Unit\Mitra\Client\Domain\Dto;
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
 use Mitra\Client\Domain\Dto\AddressDto;
 use Mitra\Client\Domain\ValueObject\AddressId;
-use Mitra\Client\Domain\ValueObject\ClientId;
+use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class AddressDtoMother
 {

@@ -7,7 +7,7 @@ namespace Mitra\Client\Domain\Dto;
 
 use Mitra\Client\Domain\Address;
 use Mitra\Client\Domain\ValueObject\AddressId;
-use Mitra\Client\Domain\ValueObject\ClientId;
+use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class AddressDto
 {

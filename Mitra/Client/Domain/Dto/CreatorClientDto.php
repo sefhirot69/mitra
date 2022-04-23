@@ -7,9 +7,9 @@ namespace Mitra\Client\Domain\Dto;
 
 use Mitra\Client\Domain\Address;
 use Mitra\Client\Domain\Client;
-use Mitra\Client\Domain\ValueObject\ClientId;
 use Mitra\Client\Domain\ValueObject\ClientName;
 use Mitra\Client\Domain\ValueObject\ClientSurname;
+use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class CreatorClientDto
 {

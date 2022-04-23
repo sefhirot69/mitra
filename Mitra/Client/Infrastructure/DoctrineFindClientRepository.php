@@ -20,7 +20,7 @@ final class DoctrineFindClientRepository extends DoctrineRepository implements F
      */
     public function find(Uuid $uuid): ?ClientDto
     {
-        $clientDoctrine = $this->repository(ClientDoctrine::class)->find($uuid);
+        $clientDoctrine = $this->repository(ClientDoctrine::class)->findOneBy(['id' => $uuid]);
 
         if (null === $clientDoctrine) {
             throw new ClientNotFoundException($uuid->value());

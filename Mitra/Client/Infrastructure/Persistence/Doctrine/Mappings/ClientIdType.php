@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mitra\Client\Infrastructure\Persistence\Doctrine\Mappings;
 
-use Mitra\Shared\Domain\Clients\ClientId;
+use Mitra\Shared\Domain\ValueObject\ClientId;
 use Mitra\Shared\Infrastructure\Persistence\Doctrine\UuidType;
 
 final class ClientIdType extends UuidType

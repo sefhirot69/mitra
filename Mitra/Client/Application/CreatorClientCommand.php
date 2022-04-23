@@ -6,9 +6,9 @@ declare(strict_types=1);
 namespace Mitra\Client\Application;
 
 use Mitra\Client\Domain\Dto\CreatorClientDto;
-use Mitra\Client\Domain\ValueObject\ClientId;
 use Mitra\Client\Domain\ValueObject\ClientName;
 use Mitra\Client\Domain\ValueObject\ClientSurname;
+use Mitra\Shared\Domain\ValueObject\ClientId;
 
 
 final class CreatorClientCommand

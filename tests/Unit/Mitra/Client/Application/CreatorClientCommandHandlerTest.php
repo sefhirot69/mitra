@@ -5,6 +5,7 @@ namespace App\Tests\Unit\Mitra\Client\Application;
 use App\Tests\Unit\Mitra\Client\Domain\Dto\ClientDtoMother;
 use App\Tests\Unit\Mitra\Client\Domain\Dto\CreatorClientDtoMother;
 use Mitra\Client\Application\CreatorClientCommandHandler;
+use Mitra\Client\Domain\ClientNotFoundException;
 use Mitra\Client\Domain\Exception\ClientExistException;
 use Mitra\Client\Domain\Interfaces\CreatorClientRepository;
 use Mitra\Client\Domain\Interfaces\FindClientRepository;
@@ -34,7 +35,7 @@ final class CreatorClientCommandHandlerTest extends TestCase
             ->expects(self::once())
             ->method('find')
             ->with($commandClientCreator->mapToDto()->getUuid())
-            ->willReturn(null);
+            ->willThrowException(new ClientNotFoundException($commandClientCreator->mapToDto()->getUuid()));
 
         $this->creatorClientMock
             ->expects(self::once())

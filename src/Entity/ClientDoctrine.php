@@ -8,22 +8,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Mitra\Client\Domain\Client;
-use Mitra\Client\Domain\ValueObject\ClientId;
 use Mitra\Client\Domain\ValueObject\ClientName;
 use Mitra\Client\Domain\ValueObject\ClientSurname;
 use Mitra\Shared\Domain\Aggregate\AggregateRoot;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
-use Ramsey\Uuid\UuidInterface;
+use Mitra\Shared\Domain\ValueObject\ClientId;
+use Mitra\Shared\Domain\ValueObject\Uuid;
 
 #[ORM\Table(name: 'Client')]
 #[ORM\Entity(repositoryClass: ClientDoctrineRepository::class)]
 class ClientDoctrine extends AggregateRoot
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class:UuidGenerator::class)]
     #[ORM\Column(type: 'uuid')]
-    private UuidInterface $id;
+    private Uuid $id;
 
     #[ORM\Column(type: 'string', length: 150)]
     private string $name;
@@ -38,12 +35,12 @@ class ClientDoctrine extends AggregateRoot
     private Collection $address;
 
     /**
-     * @param UuidInterface $uuid
+     * @param Uuid $uuid
      * @param string $name
      * @param string $surname
      */
     public function __construct(
-        UuidInterface $uuid,
+        Uuid $uuid,
         string $name,
         string $surname,
     ) {
@@ -56,7 +53,7 @@ class ClientDoctrine extends AggregateRoot
 
 
     public static function create(
-        UuidInterface $uuid,
+        Uuid $uuid,
         string $name,
         string $surname,
     ): self {
@@ -65,7 +62,7 @@ class ClientDoctrine extends AggregateRoot
 
     public function getId(): ?string
     {
-        return $this->id->toString();
+        return $this->id->value();
     }
 
     public function getName(): ?string

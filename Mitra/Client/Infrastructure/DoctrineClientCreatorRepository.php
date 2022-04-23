@@ -18,7 +18,7 @@ final class DoctrineClientCreatorRepository extends DoctrineRepository implement
         $clientDomain = $creatorClientDto->mapToDomain();
 
         $clientDoctrine = ClientDoctrine::create(
-            $clientDomain->getId()->uuidInterface(),
+            $clientDomain->getId(),
             $clientDomain->getName(),
             $clientDomain->getSurname()
         );
