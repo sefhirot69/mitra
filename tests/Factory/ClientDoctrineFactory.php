@@ -33,7 +33,7 @@ final class ClientDoctrineFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'uuid' => Uuid::fromString(self::faker()->uuid()),
+            'id' => Uuid::fromString(self::faker()->uuid()),
             'name' => self::faker()->firstName(),
             'surname' => self::faker()->lastName(),
         ];

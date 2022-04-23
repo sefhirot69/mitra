@@ -4,7 +4,7 @@ namespace App\Factory;
 
 use App\Entity\ClientDoctrine;
 use App\Repository\ClientDoctrineRepository;
-use Ramsey\Uuid\Uuid;
+use Mitra\Shared\Domain\ValueObject\ClientId;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -37,7 +37,7 @@ final class ClientDoctrineFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'uuid' => Uuid::fromString(self::faker()->uuid()),
+            'id' => new ClientId(self::faker()->uuid()),
             'name' => self::faker()->firstName(),
             'surname' => self::faker()->lastName(),
         ];

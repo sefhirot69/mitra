@@ -2,6 +2,8 @@
 
 namespace App\Tests\e2e\Controller\Client;
 
+use App\Factory\ClientDoctrineFactory;
+use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -20,9 +22,9 @@ final class ClientCreatorControllerTest extends WebTestCase
     public function shouldCreateClientAndReturn201() : void {
 
         $this->client->request('POST','client', [
-            'id' => 'feb21714-b84a-11ec-82de-0242ac1f0002',
-            'name' => 'Pepillo',
-            'surname' => 'Huevo Frito',
+            'id' => MotherCreator::random()->uuid(),
+            'name' => MotherCreator::random()->firstName(),
+            'surname' => MotherCreator::random()->lastName(),
         ]);
 
         self::assertResponseIsSuccessful();
@@ -33,16 +35,15 @@ final class ClientCreatorControllerTest extends WebTestCase
     /**
      * @test
      */
-    public function shouldReturnErrorBadRequest() : void {
-
-        $this->client->request('POST','client', [
+    public function shouldReturnErrorBadRequest(): void
+    {
+        $this->client->request('POST', 'client', [
             'id' => 'feb21714-b84a-11ec-82de-0242ac1f0002',
-            'name' => 'Pepillo',
-            'surname' => 'Huevo Frito',
+            'name' => MotherCreator::random()->firstName(),
+            'surname' => MotherCreator::random()->lastName(),
         ]);
 
         self::assertResponseStatusCodeSame(400);
-
     }
 
 

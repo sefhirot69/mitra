@@ -28,14 +28,19 @@ final class ClientCreatorController extends AbstractController
     #[Route('/client', name: 'app_client_creator')]
     public function __invoke(Request $request): JsonResponse
     {
-        ($this->commandHandler)(
-            new CreatorClientCommand(
-                $request->request->get('id'),
-                $request->request->get('name'),
-                $request->request->get('surname'),
-            )
-        );
+        try {
+            ($this->commandHandler)(
+                new CreatorClientCommand(
+                    $request->request->get('id'),
+                    $request->request->get('name'),
+                    $request->request->get('surname'),
+                )
+            );
 
-        return $this->json([], Response::HTTP_CREATED);
+            return $this->json([], Response::HTTP_CREATED);
+        } catch(\Exception $exception) {
+            return $this->json(['error' => $exception->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
+
     }
 }

@@ -12,7 +12,6 @@ use Mitra\Client\Domain\ValueObject\ClientName;
 use Mitra\Client\Domain\ValueObject\ClientSurname;
 use Mitra\Shared\Domain\Aggregate\AggregateRoot;
 use Mitra\Shared\Domain\ValueObject\ClientId;
-use Mitra\Shared\Domain\ValueObject\Uuid;
 
 #[ORM\Table(name: 'Client')]
 #[ORM\Entity(repositoryClass: ClientDoctrineRepository::class)]
@@ -20,7 +19,7 @@ class ClientDoctrine extends AggregateRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid')]
-    private Uuid $id;
+    private ClientId $id;
 
     #[ORM\Column(type: 'string', length: 150)]
     private string $name;
@@ -35,16 +34,16 @@ class ClientDoctrine extends AggregateRoot
     private Collection $address;
 
     /**
-     * @param Uuid $uuid
+     * @param ClientId $id
      * @param string $name
      * @param string $surname
      */
     public function __construct(
-        Uuid $uuid,
+        ClientId $id,
         string $name,
         string $surname,
     ) {
-        $this->id = $uuid;
+        $this->id = $id;
         $this->name = $name;
         $this->surname = $surname;
         $this->createdAt = new DateTimeImmutable();
@@ -53,14 +52,14 @@ class ClientDoctrine extends AggregateRoot
 
 
     public static function create(
-        Uuid $uuid,
+        ClientId $id,
         string $name,
         string $surname,
     ): self {
-        return new self($uuid, $name, $surname);
+        return new self($id, $name, $surname);
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id->value();
     }

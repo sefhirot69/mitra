@@ -35,12 +35,12 @@ final class DoctrineFindClientRepositoryTest extends TestCase
     {
         //GIVEN
         $clientId = ClientId::random();
-        $clientDoctrine = ClientDoctrineFactory::new()->withoutPersisting()->create(['uuid' => $clientId->uuidInterface()]);
+        $clientDoctrine = ClientDoctrineFactory::new()->withoutPersisting()->create(['id' => $clientId]);
 
         $this->objectRepository
             ->expects(self::once())
-            ->method('find')
-            ->with($clientId)
+            ->method('findOneBy')
+            ->with(['id' => $clientId])
             ->willReturn($clientDoctrine->object());
         $this->entityManager
             ->expects(self::once())
@@ -70,8 +70,8 @@ final class DoctrineFindClientRepositoryTest extends TestCase
 
         $this->objectRepository
             ->expects(self::once())
-            ->method('find')
-            ->with($clientId)
+            ->method('findOneBy')
+            ->with(['id' => $clientId])
             ->willReturn($clientDoctrine);
         $this->entityManager
             ->expects(self::once())
