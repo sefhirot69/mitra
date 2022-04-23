@@ -7,6 +7,7 @@ namespace Mitra\Shared\Infrastructure\Persistence\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Mitra\Shared\Domain\Aggregate\AggregateRoot;
 
 abstract class DoctrineRepository
@@ -34,7 +35,7 @@ abstract class DoctrineRepository
         $this->entityManager()->flush($entity);
     }
 
-    protected function repository(string $entityClass): EntityRepository
+    protected function repository(string $entityClass): EntityRepository|ObjectRepository
     {
         return $this->entityManager->getRepository($entityClass);
     }

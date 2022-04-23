@@ -7,6 +7,10 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Mitra\Client\Domain\Client;
+use Mitra\Client\Domain\ValueObject\ClientId;
+use Mitra\Client\Domain\ValueObject\ClientName;
+use Mitra\Client\Domain\ValueObject\ClientSurname;
 use Mitra\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
@@ -128,5 +132,15 @@ class ClientDoctrine extends AggregateRoot
         }
 
         return $this;
+    }
+
+    public function mapToDomain(): Client
+    {
+        return Client::create(
+            new ClientId($this->getId()),
+            new ClientName($this->getName()),
+            new ClientSurname($this->getSurname()),
+            $this->getCreatedAt()
+        );
     }
 }

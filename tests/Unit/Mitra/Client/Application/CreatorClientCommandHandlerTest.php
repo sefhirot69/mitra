@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Mitra\Client\Application;
 
+use App\Tests\Unit\Mitra\Client\Domain\Dto\ClientDtoMother;
 use App\Tests\Unit\Mitra\Client\Domain\Dto\CreatorClientDtoMother;
 use Mitra\Client\Application\CreatorClientCommandHandler;
 use Mitra\Client\Domain\Exception\ClientExistException;
@@ -61,7 +62,7 @@ final class CreatorClientCommandHandlerTest extends TestCase
             ->expects(self::once())
             ->method('find')
             ->with($idClient)
-            ->willReturn(CreatorClientDtoMother::random());
+            ->willReturn(ClientDtoMother::random());
 
         $this->creatorClientMock
             ->expects(self::never())

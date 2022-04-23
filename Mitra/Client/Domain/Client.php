@@ -85,5 +85,4 @@ class Client
         return $this->address;
     }
 
-
 }
