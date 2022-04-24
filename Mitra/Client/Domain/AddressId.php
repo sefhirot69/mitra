@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Mitra\Client\Domain\ValueObject;
+namespace Mitra\Client\Domain;
 
 use Mitra\Shared\Domain\ValueObject\Uuid;
 

@@ -5,8 +5,8 @@ namespace App\Tests\Unit\Mitra\Client\Application;
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
 use InvalidArgumentException;
 use Mitra\Client\Application\CreatorClientCommand;
-use Mitra\Client\Domain\ValueObject\ClientName;
-use Mitra\Client\Domain\ValueObject\ClientSurname;
+use Mitra\Client\Domain\ClientName;
+use Mitra\Client\Domain\ClientSurname;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 use PHPUnit\Framework\TestCase;
 

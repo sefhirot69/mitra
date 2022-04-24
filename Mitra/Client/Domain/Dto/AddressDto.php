@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Mitra\Client\Domain\Dto;
 
 use Mitra\Client\Domain\Address;
-use Mitra\Client\Domain\ValueObject\AddressId;
+use Mitra\Client\Domain\AddressId;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class AddressDto

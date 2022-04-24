@@ -8,8 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Mitra\Client\Domain\Client;
-use Mitra\Client\Domain\ValueObject\ClientName;
-use Mitra\Client\Domain\ValueObject\ClientSurname;
+use Mitra\Client\Domain\ClientName;
+use Mitra\Client\Domain\ClientSurname;
 use Mitra\Shared\Domain\Aggregate\AggregateRoot;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 

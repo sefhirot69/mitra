@@ -8,7 +8,7 @@ namespace Mitra\Client\Infrastructure;
 use App\Entity\ClientDoctrine;
 use Mitra\Client\Domain\ClientNotFoundException;
 use Mitra\Client\Domain\Dto\ClientDto;
-use Mitra\Client\Domain\Interfaces\FindClientRepository;
+use Mitra\Client\Domain\FindClientRepository;
 use Mitra\Shared\Domain\ValueObject\Uuid;
 use Mitra\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 

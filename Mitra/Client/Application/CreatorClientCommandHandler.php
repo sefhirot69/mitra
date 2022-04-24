@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Mitra\Client\Application;
 
+use Mitra\Client\Domain\ClientExistException;
 use Mitra\Client\Domain\ClientNotFoundException;
-use Mitra\Client\Domain\Exception\ClientExistException;
-use Mitra\Client\Domain\Interfaces\CreatorClientRepository;
-use Mitra\Client\Domain\Interfaces\FindClientRepository;
+use Mitra\Client\Domain\CreatorClientRepository;
+use Mitra\Client\Domain\FindClientRepository;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class CreatorClientCommandHandler

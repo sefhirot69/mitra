@@ -3,12 +3,11 @@
 namespace App\Tests\Unit\Mitra\Client\Application;
 
 use App\Tests\Unit\Mitra\Client\Domain\Dto\ClientDtoMother;
-use App\Tests\Unit\Mitra\Client\Domain\Dto\CreatorClientDtoMother;
 use Mitra\Client\Application\CreatorClientCommandHandler;
+use Mitra\Client\Domain\ClientExistException;
 use Mitra\Client\Domain\ClientNotFoundException;
-use Mitra\Client\Domain\Exception\ClientExistException;
-use Mitra\Client\Domain\Interfaces\CreatorClientRepository;
-use Mitra\Client\Domain\Interfaces\FindClientRepository;
+use Mitra\Client\Domain\CreatorClientRepository;
+use Mitra\Client\Domain\FindClientRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

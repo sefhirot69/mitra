@@ -6,8 +6,8 @@ declare(strict_types=1);
 namespace Mitra\Client\Infrastructure;
 
 use App\Entity\ClientDoctrine;
+use Mitra\Client\Domain\CreatorClientRepository;
 use Mitra\Client\Domain\Dto\CreatorClientDto;
-use Mitra\Client\Domain\Interfaces\CreatorClientRepository;
 use Mitra\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
 final class DoctrineClientCreatorRepository extends DoctrineRepository implements CreatorClientRepository

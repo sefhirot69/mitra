@@ -6,8 +6,6 @@ declare(strict_types=1);
 namespace Mitra\Client\Domain;
 
 use DateTimeImmutable;
-use Mitra\Client\Domain\ValueObject\ClientName;
-use Mitra\Client\Domain\ValueObject\ClientSurname;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 
 class Client

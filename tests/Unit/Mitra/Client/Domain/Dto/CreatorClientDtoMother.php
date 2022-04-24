@@ -6,9 +6,9 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Mitra\Client\Domain\Dto;
 
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
+use Mitra\Client\Domain\ClientName;
+use Mitra\Client\Domain\ClientSurname;
 use Mitra\Client\Domain\Dto\CreatorClientDto;
-use Mitra\Client\Domain\ValueObject\ClientName;
-use Mitra\Client\Domain\ValueObject\ClientSurname;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class CreatorClientDtoMother

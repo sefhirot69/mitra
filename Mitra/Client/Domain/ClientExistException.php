@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace Mitra\Client\Domain\Exception;
+namespace Mitra\Client\Domain;
 
 use Exception;
 
