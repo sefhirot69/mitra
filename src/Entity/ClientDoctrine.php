@@ -10,12 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Mitra\Client\Domain\Client;
 use Mitra\Client\Domain\ClientName;
 use Mitra\Client\Domain\ClientSurname;
-use Mitra\Shared\Domain\Aggregate\AggregateRoot;
+use Mitra\Client\Infrastructure\Persistence\Doctrine\EntityRoot;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 
 #[ORM\Table(name: 'Client')]
 #[ORM\Entity(repositoryClass: ClientDoctrineRepository::class)]
-class ClientDoctrine extends AggregateRoot
+class ClientDoctrine extends EntityRoot
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid')]

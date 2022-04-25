@@ -6,9 +6,10 @@ declare(strict_types=1);
 namespace Mitra\Client\Domain;
 
 use DateTimeImmutable;
+use Mitra\Shared\Domain\Aggregate\AggregateRoot;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 
-class Client
+class Client extends AggregateRoot
 {
 
     /**
