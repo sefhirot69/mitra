@@ -19,13 +19,20 @@ class Client extends AggregateRoot
      * @param DateTimeImmutable|null $createdAt
      * @param null|Address[] $address
      */
-    public function __construct(
+    private function __construct(
         private ClientId $id,
         private ClientName $name,
         private ClientSurname $surname,
         private ?DateTimeImmutable $createdAt = null,
         private ?array $address = null,
     ) {
+        $this->record(
+            ClientCreatedDomainEvent::create(
+                $id->value(),
+                $name->value(),
+                $surname->value()
+            ),
+        );
     }
 
     public static function create(
