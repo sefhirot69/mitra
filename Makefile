@@ -68,6 +68,8 @@ recreate:
 	$(DOCKER_COMPOSE) up -d --build --remove-orphans --force-recreate
 	make deps
 	make start
+	make migration-force
+	make fixture-force
 rebuild:
 	@echo "🔥 Rebuild container!!!"
 	$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
@@ -86,6 +88,8 @@ entity:
 	$(SYMFONY) make:entity
 migration:
 	$(SYMFONY) make:migration
+migration-force:
+	$(SYMFONY) make:migration --no-interaction
 migrate:
 	$(SYMFONY) doctrine:migrations:migrate
 factory:
@@ -94,5 +98,7 @@ factory-test:
 	$(SYMFONY) make:factory --test
 fixture:
 	@$(SYMFONY) doctrine:fixtures:load
+fixture-force:
+	@$(SYMFONY) doctrine:fixtures:load --no-interaction
 import-database:
 	$(SYMFONY) doctrine:mapping:import Mitra annotation --path="Mitra/Clients/Infrastructure/Doctrine/Entity"

@@ -2,7 +2,6 @@
 
 namespace App\Tests\e2e\Controller\Client;
 
-use App\Factory\ClientDoctrineFactory;
 use App\Tests\Unit\Mitra\Shared\Domain\MotherCreator;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
