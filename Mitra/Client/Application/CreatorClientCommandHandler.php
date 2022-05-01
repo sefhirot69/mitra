@@ -8,6 +8,7 @@ use Mitra\Client\Domain\ClientExistException;
 use Mitra\Client\Domain\ClientFinder;
 use Mitra\Client\Domain\ClientNotFoundException;
 use Mitra\Client\Domain\CreatorClientRepository;
+use Mitra\Shared\Domain\Bus\Event\EventBus;
 use Mitra\Shared\Domain\ValueObject\ClientId;
 
 final class CreatorClientCommandHandler
@@ -15,6 +16,7 @@ final class CreatorClientCommandHandler
     public function __construct(
         private CreatorClientRepository $creatorClient,
         private ClientFinder $clientFinder,
+        private EventBus $bus
     ) {
     }
 
@@ -26,7 +28,10 @@ final class CreatorClientCommandHandler
         $creatorClientDto = $clientCommand->mapToDto();
         $idClient = $creatorClientDto->getUuid();
         if ($this->assertNotExistClient($idClient)) {
-            return $this->creatorClient->save($creatorClientDto);
+            $client = $this->creatorClient->save($creatorClientDto);
+
+            $this->bus->publish(... $client->pullDomainEvents());
+            return true;
         }
 
         return false;

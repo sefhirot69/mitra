@@ -38,7 +38,7 @@ final class DoctrineClientCreatorRepositoryTest extends TestCase
         $result = $repository->save($creatorClientDto);
 
         //THEN
-        self::assertTrue($result);
+        self::assertNotEmpty($result);
     }
 
     /**
@@ -59,7 +59,7 @@ final class DoctrineClientCreatorRepositoryTest extends TestCase
         $result = $repository->save($creatorClientDto);
 
         //THEN
-        self::assertTrue($result);
+        self::assertObjectHasAttribute('address',$result);
     }
 
 }

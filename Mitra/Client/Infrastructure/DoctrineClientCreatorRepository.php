@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Mitra\Client\Infrastructure;
 
 use App\Entity\ClientDoctrine;
+use Mitra\Client\Domain\Client;
 use Mitra\Client\Domain\CreatorClientRepository;
 use Mitra\Client\Domain\Dto\CreatorClientDto;
 use Mitra\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
@@ -13,7 +14,7 @@ use Mitra\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 final class DoctrineClientCreatorRepository extends DoctrineRepository implements CreatorClientRepository
 {
 
-    public function save(CreatorClientDto $creatorClientDto): bool
+    public function save(CreatorClientDto $creatorClientDto): Client
     {
         $clientDomain = $creatorClientDto->mapToDomain();
 
@@ -26,6 +27,6 @@ final class DoctrineClientCreatorRepository extends DoctrineRepository implement
         //Hay que convertir a dominio
         $this->persist($clientDoctrine);
 
-        return true;
+        return $clientDomain;
     }
 }

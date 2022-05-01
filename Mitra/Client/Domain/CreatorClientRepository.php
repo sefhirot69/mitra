@@ -9,5 +9,5 @@ use Mitra\Client\Domain\Dto\CreatorClientDto;
 
 interface CreatorClientRepository
 {
-    public function save(CreatorClientDto $creatorClientDto) : bool;
+    public function save(CreatorClientDto $creatorClientDto) : Client;
 }

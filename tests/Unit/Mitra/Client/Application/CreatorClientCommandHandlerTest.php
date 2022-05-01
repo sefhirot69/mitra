@@ -8,6 +8,7 @@ use Mitra\Client\Domain\ClientExistException;
 use Mitra\Client\Domain\ClientNotFoundException;
 use Mitra\Client\Domain\CreatorClientRepository;
 use Mitra\Client\Domain\ClientFinder;
+use Mitra\Shared\Domain\Bus\Event\EventBus;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -15,11 +16,13 @@ final class CreatorClientCommandHandlerTest extends TestCase
 {
     private MockObject|CreatorClientRepository $creatorClientMock;
     private MockObject|ClientFinder $findClientMock;
+    private MockObject|EventBus $eventBusMock;
 
     protected function setUp(): void
     {
         $this->creatorClientMock = $this->createMock(CreatorClientRepository::class);
         $this->findClientMock = $this->createMock(ClientFinder::class);
+        $this->eventBusMock = $this->createMock(EventBus::class);
     }
 
     /**
@@ -40,10 +43,14 @@ final class CreatorClientCommandHandlerTest extends TestCase
             ->expects(self::once())
             ->method('save')
             ->with($commandClientCreator->mapToDto())
-            ->willReturn(true);
+            ->willReturn($commandClientCreator->mapToDto()->mapToDomain());
 
         //WHEN
-        $creatorClient = new CreatorClientCommandHandler($this->creatorClientMock, $this->findClientMock);
+        $creatorClient = new CreatorClientCommandHandler(
+            $this->creatorClientMock,
+            $this->findClientMock,
+            $this->eventBusMock
+        );
 
         self::assertTrue($creatorClient($commandClientCreator));
     }
@@ -68,7 +75,11 @@ final class CreatorClientCommandHandlerTest extends TestCase
             ->expects(self::never())
             ->method('save');
 
-        $creatorClient = new CreatorClientCommandHandler($this->creatorClientMock, $this->findClientMock);
+        $creatorClient = new CreatorClientCommandHandler(
+            $this->creatorClientMock,
+            $this->findClientMock,
+            $this->eventBusMock
+        );
 
         //THEN
         $this->expectException(ClientExistException::class);
@@ -77,7 +88,6 @@ final class CreatorClientCommandHandlerTest extends TestCase
 
         //WHEN
         $creatorClient($commandClientCreator);
-
     }
 
 
