@@ -7,19 +7,19 @@ use Mitra\Client\Application\CreatorClientCommandHandler;
 use Mitra\Client\Domain\ClientExistException;
 use Mitra\Client\Domain\ClientNotFoundException;
 use Mitra\Client\Domain\CreatorClientRepository;
-use Mitra\Client\Domain\FindClientRepository;
+use Mitra\Client\Domain\ClientFinder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class CreatorClientCommandHandlerTest extends TestCase
 {
     private MockObject|CreatorClientRepository $creatorClientMock;
-    private MockObject|FindClientRepository $findClientMock;
+    private MockObject|ClientFinder $findClientMock;
 
     protected function setUp(): void
     {
         $this->creatorClientMock = $this->createMock(CreatorClientRepository::class);
-        $this->findClientMock = $this->createMock(FindClientRepository::class);
+        $this->findClientMock = $this->createMock(ClientFinder::class);
     }
 
     /**
@@ -32,7 +32,7 @@ final class CreatorClientCommandHandlerTest extends TestCase
 
         $this->findClientMock
             ->expects(self::once())
-            ->method('find')
+            ->method('__invoke')
             ->with($commandClientCreator->mapToDto()->getUuid())
             ->willThrowException(new ClientNotFoundException($commandClientCreator->mapToDto()->getUuid()));
 
@@ -60,7 +60,7 @@ final class CreatorClientCommandHandlerTest extends TestCase
 
         $this->findClientMock
             ->expects(self::once())
-            ->method('find')
+            ->method('__invoke')
             ->with($idClient)
             ->willReturn(ClientDtoMother::random());
 
