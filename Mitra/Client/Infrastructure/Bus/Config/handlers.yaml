@@ -1,0 +1,6 @@
+services:
+  Mitra\Client\Application\NotificationWelcomeOnClientCreatedHandler:
+    tags:
+      -
+        name: messenger.message_handler
+        handles: Mitra\Client\Domain\ClientCreatedDomainEvent
